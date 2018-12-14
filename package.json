@@ -1,5 +1,5 @@
 {
-  "name": "image-re-size",
+  "name": "@zenoo/image-resize",
   "title": "ImageResize",
   "description": "Resize your Image object or image inputs easily",
   "keywords": [
