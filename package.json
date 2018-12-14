@@ -1,0 +1,32 @@
+{
+  "name": "image-re-size",
+  "title": "ImageResize",
+  "description": "Autocomplete your inputs",
+  "keywords": [
+    "image",
+    "resize",
+	"size",
+	"shrink"
+  ],
+  "version": "0.0.1",
+  "author": {
+    "name": "Zenoo",
+    "url": "https://github.com/Zenoo"
+  },
+  "maintainers": [
+    {
+      "name": "Zenoo",
+      "url": "https://github.com/Zenoo"
+    }
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/mit-license.php"
+    }
+  ],
+  "bugs": "https://github.com/Zenoo/image-resize/issues",
+  "homepage": "https://github.com/Zenoo/image-resize",
+  "docs": "https://github.com/Zenoo/image-resize#readme",
+  "download": "https://github.com/Zenoo/image-resize/archive/master.zip"
+}
