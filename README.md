@@ -1,55 +1,63 @@
-# SlickComplete [(Demo)](https://jsfiddle.net/Zenoo0/z5tr4a91/)
+# ImageResize [(Demo)](https://jsfiddle.net/Zenoo0/t501v3cu/)
 
-![Dependencies](https://david-dm.org/Zenoo/slick-complete.svg)
-
-Autocomplete your inputs.
+Resize your Image object or image inputs easily
 
 ### Doc
 
 * **Installation**
 
-Simply import SlickComplete into your HTML.
+Simply import ImageResize into your HTML.
 ```
 
-<link rel="stylesheet" href="slick-complete.min.css">
-<script type="text/javascript" src="slick-complete.min.js"></script>
+<script type="text/javascript" src="https://gitcdn.link/repo/Zenoo/image-input-preview/master/ImageResize.min.js"></script>
 ```
 * **How to use**
 
-Create a new [`SlickComplete`](https://zenoo.github.io/slick-complete/SlickComplete.html) object with a query String or an Element as the first parameter :
+Create a new [`ImageResize`](https://zenoo.github.io/image-resize/ImageResize.html) object:
 ```
-let slickComplete = new SlickComplete('div.with[any="selector"]', options);
+// Empty image processor
+const resizer = new ImageResize()
+	.maxWidth(200)
+	.process('yourImageURL')
+	.then(resizedImage => {
+		document.body.appendChild(resizedImage);
+	});
+
 // OR
-let element = document.querySelector('li.terally[any="thing"]');
-let slickComplete = new SlickComplete(element, options);
+
+// Processor linked to a file input
+const resizer = new ImageResize({
+	source: document.querySelector('input.image'),
+	maxWidth: 50,
+	maxHeight: 50,
+	onResize: resizedImage => {
+		document.body.appendChild(resizedImage);
+	}
+});
 ```
+
+
 * **Options**
 
 ```
 {
-  icon: false,                                // Use an icon for your items ?
-  lang: 'en',                                 // Language
-  items: [                                    // Items list
-    {
-      id: 'yourID',                           // String or Number
-      name: {
-          'en': 'Test',                       // 'lang': 'translatedName'
-          'fr': 'Tester'
-      },
-      aliases: ['Test2','Test3'],             // Name aliases
-      icon: 'https://website.com/iconurl.jpg' // Icon URL
-    },
-    ...
-  ]
+  source: document.querySelector('input.image'), // Your file input (String selector or Element)
+  maxWidth: 50,                                  // Max width
+  maxHeight: 50,                                 // Max height
+  width: 50,                                     // Fixed width (You'll usually use either maxWidth or width)
+  height: 50,                                    // Fixed height (You'll usually use either maxHeight or height)
+  onResize: resizedImage => {
+    document.body.appendChild(resizedImage);
+  }
 }
 ```
 * **Methods**
 
-See the [documentation](https://zenoo.github.io/slick-complete/SlickComplete.html) for the method definitions.  
+See the [documentation](https://zenoo.github.io/image-resize/ImageResize.html) for the method definitions.  
 
 * **Example**
 
-See this [JSFiddle](https://jsfiddle.net/Zenoo0/z5tr4a91/) for a working example
+See this [JSFiddle](https://jsfiddle.net/Zenoo0/t501v3cu/) for a working example
 
 
 ## Authors
