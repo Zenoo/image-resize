@@ -41,12 +41,13 @@ const resizer = new ImageResize({
 
 ```
 {
-  source: document.querySelector('input.image'), // Your file input (String selector or Element)
-  maxWidth: 50,                                  // Max width
-  maxHeight: 50,                                 // Max height
-  width: 50,                                     // Fixed width (You'll usually use either maxWidth or width)
-  height: 50,                                    // Fixed height (You'll usually use either maxHeight or height)
-  onResize: resizedImage => {
+  source: yourImage,            // Your file input (String selector or Element)
+  maxWidth: 50,                 // Max width
+  maxHeight: 50,                // Max height
+  width: 50,                    // Fixed width (You'll usually use either maxWidth or width)
+  height: 50,                   // Fixed height (You'll usually use either maxHeight or height)
+  keepAspectRatio: true,        // Should the new image keep its aspect ratio ?
+  onResize: resizedImage => {   // Callback called after every resize
     document.body.appendChild(resizedImage);
   }
 }
