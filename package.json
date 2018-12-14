@@ -5,10 +5,10 @@
   "keywords": [
     "image",
     "resize",
-	"size",
-	"shrink"
+    "size",
+    "shrink"
   ],
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": {
     "name": "Zenoo",
     "url": "https://github.com/Zenoo"
