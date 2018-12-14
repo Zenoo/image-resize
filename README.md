@@ -9,7 +9,7 @@ Resize your Image object or image inputs easily
 Simply import ImageResize into your HTML.
 ```
 
-<script type="text/javascript" src="https://gitcdn.link/repo/Zenoo/image-input-preview/master/ImageResize.min.js"></script>
+<script src="https://gitcdn.link/repo/Zenoo/image-input-preview/master/ImageResize.min.js"></script>
 ```
 * **How to use**
 
