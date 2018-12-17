@@ -88,7 +88,6 @@ class ImageResize{
 			this._input.addEventListener('change', () => {
 				const [image] = this._input.files;
 	
-				// Check if user uploaded an image
 				if(image.type.match(/image.*/)){
 					this._process(image).then(resizedImage => {
 						// Call onResize callbacks
@@ -113,73 +112,85 @@ class ImageResize{
 
 			// Reader load handler
 			reader.addEventListener('load', event => {
-				const image = new Image();
+				// Special case for SVGs
+				if(file.name.endsWith('.svg')){
+					// Load the SVG before sending it back
+					const unalteredSVG = new Image();
 	
-				// Image load handler
-				image.addEventListener('load', () => {
-					let {width, height} = image;
-	
-					const ratio = width / height;
-	
-					// Scale width down to maxWidth
-					if(this._parameters.maxWidth !== null && width > this._parameters.maxWidth){
-						width = this._parameters.maxWidth;
-	
-						// Update height if keepAspectRatio
-						if(this._parameters.keepAspectRatio) height = width / ratio;
-					}
-	
-					// Scale height down to maxHeight
-					if(this._parameters.maxHeight !== null && height > this._parameters.maxHeight){
-						height = this._parameters.maxHeight;
-	
-						// Update width if keepAspectRatio
-						if(this._parameters.keepAspectRatio) width = ratio * height;
-					}
-	
-					// Scale width down to fixed width
-					if(this._parameters.width !== null && width > this._parameters.width){
-						// eslint-disable-next-line prefer-destructuring
-						width = this._parameters.width;
-	
-						// Update height if keepAspectRatio
-						if(this._parameters.keepAspectRatio) height = width / ratio;
-					}
-	
-					// Scale height down to fixed height
-					if(this._parameters.height !== null && height > this._parameters.height){
-						// eslint-disable-next-line prefer-destructuring
-						height = this._parameters.height;
-	
-						// Update width if keepAspectRatio
-						if(this._parameters.keepAspectRatio) width = ratio * height;
-					}
-	
-					// Scale the canvas accordingly
-					this._canvas.width = width;
-					this._canvas.height = height;
-
-					// Reset the canvas
-					this._canvas.getContext('2d').clearRect(0, 0, this._canvas.width, this._canvas.height);
-
-					// Draw the new image
-					this._canvas.getContext('2d').drawImage(image, 0, 0, width, height);
-	
-					// Get the processed image as dataUrl
-					const dataUrl = this._canvas.toDataURL('image/' + file.name.split('.').pop());
-	
-					// Load the new image before sending it back
-					const resizedImage = new Image();
-
-					resizedImage.addEventListener('load', () => {
-						resolve(resizedImage);
+					unalteredSVG.addEventListener('load', () => {
+						resolve(unalteredSVG);
 					});
 
-					resizedImage.src = dataUrl;
-				});
+					unalteredSVG.src = reader.result;
+				}else{
+					const image = new Image();
 	
-				// Trigger the image load
-				image.src = event.target.result;
+					// Image load handler
+					image.addEventListener('load', () => {
+						let {width, height} = image;
+		
+						const ratio = width / height;
+		
+						// Scale width down to maxWidth
+						if(this._parameters.maxWidth !== null && width > this._parameters.maxWidth){
+							width = this._parameters.maxWidth;
+		
+							// Update height if keepAspectRatio
+							if(this._parameters.keepAspectRatio) height = width / ratio;
+						}
+		
+						// Scale height down to maxHeight
+						if(this._parameters.maxHeight !== null && height > this._parameters.maxHeight){
+							height = this._parameters.maxHeight;
+		
+							// Update width if keepAspectRatio
+							if(this._parameters.keepAspectRatio) width = ratio * height;
+						}
+		
+						// Scale width down to fixed width
+						if(this._parameters.width !== null && width > this._parameters.width){
+							// eslint-disable-next-line prefer-destructuring
+							width = this._parameters.width;
+		
+							// Update height if keepAspectRatio
+							if(this._parameters.keepAspectRatio) height = width / ratio;
+						}
+		
+						// Scale height down to fixed height
+						if(this._parameters.height !== null && height > this._parameters.height){
+							// eslint-disable-next-line prefer-destructuring
+							height = this._parameters.height;
+		
+							// Update width if keepAspectRatio
+							if(this._parameters.keepAspectRatio) width = ratio * height;
+						}
+		
+						// Scale the canvas accordingly
+						this._canvas.width = width;
+						this._canvas.height = height;
+	
+						// Reset the canvas
+						this._canvas.getContext('2d').clearRect(0, 0, this._canvas.width, this._canvas.height);
+	
+						// Draw the new image
+						this._canvas.getContext('2d').drawImage(image, 0, 0, width, height);
+		
+						// Get the processed image as dataUrl
+						const dataUrl = this._canvas.toDataURL('image/' + file.name.split('.').pop());
+		
+						// Load the new image before sending it back
+						const resizedImage = new Image();
+	
+						resizedImage.addEventListener('load', () => {
+							resolve(resizedImage);
+						});
+	
+						resizedImage.src = dataUrl;
+					});
+		
+					// Trigger the image load
+					image.src = event.target.result;
+				}
 			});
 	
 			// Trigger the reader load
