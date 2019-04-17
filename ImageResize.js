@@ -15,7 +15,7 @@ class ImageResize{
 	 * @param {Number}         [parameters.height]               Image fixed width
 	 * @param {Function}       [parameters.onResize]             Resize callback
      */
-    constructor(parameters){
+    constructor(parameters = {}){
 		/**
 		 * Parameters holder
 		 * @type {Object}
