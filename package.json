@@ -12,7 +12,7 @@
     "size",
     "shrink"
   ],
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "ImageResize.js",
   "author": {
     "name": "Zenoo",
