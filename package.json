@@ -13,6 +13,7 @@
     "shrink"
   ],
   "version": "0.1.1",
+  "main": "ImageResize.js",
   "author": {
     "name": "Zenoo",
     "url": "https://github.com/Zenoo"
